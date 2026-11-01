@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2a78d6">
+  <title>Mis Finanzas</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">💰 <span>Mis Finanzas</span></div>
+    <div class="month-picker" aria-label="Mes seleccionado">
+      <button class="icon-btn" id="prevMonth" aria-label="Mes anterior">‹</button>
+      <span id="monthLabel"></span>
+      <button class="icon-btn" id="nextMonth" aria-label="Mes siguiente">›</button>
+    </div>
+    <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema">◐</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button data-view="resumen" class="active">📊<span>Resumen</span></button>
+    <button data-view="presupuestos">🎯<span>Presupuestos</span></button>
+    <button data-view="movimientos">🧾<span>Movimientos</span></button>
+    <button data-view="importar">🏦<span>Conectar / Importar</span></button>
+    <button data-view="ajustes">⚙️<span>Ajustes</span></button>
+  </nav>
+
+  <main id="app"></main>
+
+  <button class="fab" id="fabAdd" aria-label="Agregar movimiento">＋</button>
+
+  <dialog id="txDialog">
+    <form method="dialog" id="txForm" class="form">
+      <h3 id="txDialogTitle">Nuevo movimiento</h3>
+      <div class="seg">
+        <label><input type="radio" name="kind" value="gasto" checked> Gasto</label>
+        <label><input type="radio" name="kind" value="ingreso"> Ingreso</label>
+      </div>
+      <label>Monto <input name="amount" inputmode="decimal" required placeholder="0"></label>
+      <label>Descripción <input name="desc" required placeholder="Ej: Supermercado Lider"></label>
+      <label>Fecha <input type="date" name="date" required></label>
+      <label>Categoría <select name="categoryId"></select></label>
+      <label>Cuenta / tarjeta <select name="accountId"></select></label>
+      <div class="row-end">
+        <button type="button" class="btn ghost" id="txDelete" hidden>Eliminar</button>
+        <button value="cancel" class="btn ghost" formnovalidate>Cancelar</button>
+        <button value="ok" class="btn primary">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="tooltip" role="tooltip" hidden></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="parsers.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
